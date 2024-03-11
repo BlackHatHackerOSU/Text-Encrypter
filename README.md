@@ -2,10 +2,10 @@ This project provides a Python implementation for a basic encryption and decrypt
 
 
 # Project Structure:
-encryption.py: The core module that implements the myEncryption class. It provides functionality for key derivation, encryption, and decryption.
-test_encryption.py: A test module using pytest to verify the encryption and decryption logic.
-test_encryption_print.py: An interactive test script to demonstrate encryption and decryption flows with user input.
-LICENSE: The license file containing the terms under which the software is distributed.
+- encryption.py: The core module that implements the myEncryption class. It provides functionality for key derivation, encryption, and decryption.
+- test_encryption.py: A test module using pytest to verify the encryption and decryption logic.
+- test_encryption_print.py: An interactive test script to demonstrate encryption and decryption flows with user input.
+- LICENSE: The license file containing the terms under which the software is distributed.
 
 # Installation
 
