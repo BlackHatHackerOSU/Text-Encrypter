@@ -11,8 +11,8 @@ This project provides a Python implementation for a basic encryption and decrypt
 
 **Open your terminal and run the following commands** 
 
-git clone <git clone https://github.com/BlackHatHackerOSU/Text-Encrypter.git>
-cd Text-Encrypter
+1. git clone <git clone https://github.com/BlackHatHackerOSU/Text-Encrypter.git>
+2. cd Text-Encrypter
 
 **Ensure Python is Installed**
 python --version
