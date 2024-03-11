@@ -1,43 +1,44 @@
-import pytest
-from encryption import myEncryption 
+from encryption import myEncryption
+
+class SecureMessageHandler:
+    def __init__(self, passphrase):
+        self.initialPassphrase = passphrase
+        self.crypt = myEncryption(passphrase)
+
+    def verifyPassphrase(self, prompt):
+        passphrase = input(prompt)
+        return passphrase == self.initialPassphrase
+
+    def encryptMessage(self, plaintext):
+        if not self.verifyPassphrase("\nEnter your passphrase for encryption: "):
+            print("\nThe entered passphrase does not match the initialized passphrase. Encryption aborted.")
+            return None
+        return self.crypt.encrypt(plaintext)
+
+    def decryptMessage(self, encryptedText):
+        if not self.verifyPassphrase("\nEnter your passphrase for decryption: "):
+            print("\nThe entered passphrase does not match the initialized passphrase. Decryption aborted.")
+            return None
+        return self.crypt.decrypt(encryptedText)
 
 def main():
-    # Define a passphrase for the encryption key
-    passphrase = "Super_Secret_Passcode"
-    
-    # Initialize your encryption class with the passphrase
-    crypt = myEncryption(passphrase)
-    
-    # Define the plaintext message you want to encrypt
-    plaintext = input("What is your secret message?: ")
+    initialPassphrase = input("\nInitialize your passphrase: ")
+    handler = SecureMessageHandler(initialPassphrase)
 
-    print("\n")
-    
-    # Print the unencrypted text
-    print("Unencrypted: ", plaintext)
+    plaintext = input("\nWhat is your secret message?: ")
+    encryptedText = handler.encryptMessage(plaintext)
 
-    print("\n")
-    
-    # Encrypt the plaintext
-    encryptedText = crypt.encrypt(plaintext)
-    
-    # Print the encrypted text
-    print("Encrypted Text: ", encryptedText)
+    if encryptedText:
+        print("\nEncrypted Text: ", encryptedText)
+        print("\nEncrypted Text (Hex):", encryptedText.hex())
 
-    print("\n")
-
-    # Decode to readable format
-    print("Encrypted Text (Hex):", encryptedText.hex())
-
-    print("\n")
-
-    # Decrypt the text
-    decryptedText = crypt.decrypt(encryptedText)
-
-    # Print the decrypted text
-    print("Decrypted Text: ", decryptedText)
-
-    print("\n")
+        decryptedText = handler.decryptMessage(encryptedText)
+        if decryptedText:
+            print("\nDecrypted Text: ", decryptedText, "\n")
+        else:
+            print("\n** Decryption failed or was aborted. **\n")
+    else:
+        print("\n** Encryption failed or was aborted.** \n")
 
 if __name__ == "__main__":
     main()
